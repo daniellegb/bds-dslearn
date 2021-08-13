@@ -13,9 +13,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_course")
-public class Course implements Serializable{
+public class Course implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -68,7 +68,7 @@ public class Course implements Serializable{
 	public void setImgGrayUri(String imgGrayUri) {
 		this.imgGrayUri = imgGrayUri;
 	}
-	
+
 	public List<Offer> getOffers() {
 		return offers;
 	}
@@ -97,5 +97,4 @@ public class Course implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

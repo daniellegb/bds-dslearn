@@ -13,13 +13,13 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import enums.DeliverStatus;
+import com.devsuperior.dslearnbds.entities.enums.DeliverStatus;
 
 @Entity
 @Table(name = "tb_deliver")
-public class Deliver implements Serializable{
+public class Deliver implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -147,5 +147,4 @@ public class Deliver implements Serializable{
 			return false;
 		return true;
 	}
-
 }

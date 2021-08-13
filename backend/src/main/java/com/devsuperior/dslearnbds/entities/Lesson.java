@@ -22,9 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_lesson")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Lesson implements Serializable{
+public abstract class Lesson implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,8 +32,11 @@ public abstract class Lesson implements Serializable{
 	private Integer position;
 	
 	@ManyToOne
-	@JoinColumn(name="section_id")
+	@JoinColumn(name = "section_id")
 	private Section section;
+	
+	@OneToMany(mappedBy = "lesson")
+	private List<Deliver> deliveries = new ArrayList<>();
 	
 	@ManyToMany
 	@JoinTable(name = "tb_lessons_done",
@@ -44,9 +47,6 @@ public abstract class Lesson implements Serializable{
 		}
 	)
 	private Set<Enrollment> enrollmentsDone = new HashSet<>();
-
-	@OneToMany(mappedBy = "lesson")
-	private List<Deliver> deliveries = new ArrayList<>();
 	
 	public Lesson() {
 	}
@@ -95,6 +95,10 @@ public abstract class Lesson implements Serializable{
 		return enrollmentsDone;
 	}
 
+	public List<Deliver> getDeliveries() {
+		return deliveries;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,5 +123,4 @@ public abstract class Lesson implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

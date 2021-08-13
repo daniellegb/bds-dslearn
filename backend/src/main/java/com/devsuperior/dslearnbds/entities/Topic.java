@@ -21,19 +21,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_topic")
-public class Topic implements Serializable{
+public class Topic implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String title;
-	
-	@Column(columnDefinition="TEXT")
+
+	@Column(columnDefinition = "TEXT")
 	private String body;
 	
-	@Column(columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant moment;
 	
 	@ManyToOne
@@ -48,11 +47,10 @@ public class Topic implements Serializable{
 	@JoinColumn(name = "lesson_id")
 	private Lesson lesson;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "reply_id")
 	private Reply answer;
-
+	
 	@ManyToMany
 	@JoinTable(name = "tb_topic_likes",
 		joinColumns = @JoinColumn(name = "topic_id"),
@@ -62,17 +60,17 @@ public class Topic implements Serializable{
 	@OneToMany(mappedBy = "topic")
 	private List<Reply> replies = new ArrayList<>();
 	
-	
 	public Topic() {
 	}
 
-	public Topic(Long id, String title, String body, Instant moment, User autor, Lesson lesson) {
+	public Topic(Long id, String title, String body, Instant moment, User author, Offer offer, Lesson lesson) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.body = body;
 		this.moment = moment;
-		this.author = autor;
+		this.author = author;
+		this.offer = offer;
 		this.lesson = lesson;
 	}
 
@@ -82,6 +80,14 @@ public class Topic implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getBody() {
@@ -100,12 +106,20 @@ public class Topic implements Serializable{
 		this.moment = moment;
 	}
 
-	public User getAutor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAutor(User autor) {
-		this.author = autor;
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public Offer getOffer() {
+		return offer;
+	}
+
+	public void setOffer(Offer offer) {
+		this.offer = offer;
 	}
 
 	public Lesson getLesson() {
@@ -120,16 +134,12 @@ public class Topic implements Serializable{
 		return likes;
 	}
 
-	public void setLikes(Set<User> likes) {
-		this.likes = likes;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
 	public Reply getAnswer() {
 		return answer;
+	}
+
+	public void setAnswer(Reply answer) {
+		this.answer = answer;
 	}
 
 	public List<Reply> getReplies() {
@@ -160,5 +170,4 @@ public class Topic implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

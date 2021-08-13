@@ -13,29 +13,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import enums.ResourceType;
+import com.devsuperior.dslearnbds.entities.enums.ResourceType;
 
 @Entity
 @Table(name = "tb_resource")
-public class Resource implements Serializable{
+public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String title;
 	private String description;
 	private Integer position;
 	private String imgUri;
 	private ResourceType type;
-	//private String externalLink;
 	
 	@ManyToOne
 	@JoinColumn(name = "offer_id")
 	private Offer offer;
-	
-	@OneToMany(mappedBy="resource")
+
+	@OneToMany(mappedBy = "resource")
 	private List<Section> sections = new ArrayList<>();
 	
 	public Resource() {
@@ -52,7 +50,6 @@ public class Resource implements Serializable{
 		this.type = type;
 		this.offer = offer;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -110,10 +107,6 @@ public class Resource implements Serializable{
 		this.offer = offer;
 	}
 
-	public List<Section> getSections() {
-		return sections;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,5 +131,4 @@ public class Resource implements Serializable{
 			return false;
 		return true;
 	}
-	
 }
