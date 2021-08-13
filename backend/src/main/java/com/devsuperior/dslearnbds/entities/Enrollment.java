@@ -27,8 +27,8 @@ public class Enrollment {
 	private boolean available;
 	private boolean onlyUpdate;
 	
-	//@ManyToMany
-	//private Set<Lesson> lessonsDone = new HashSet<>();
+	@ManyToMany(mappedBy = "enrollmentsDone")
+	private Set<Lesson> lessonsDone = new HashSet<>();
 	
 	public Enrollment() {
 	}
@@ -91,7 +91,9 @@ public class Enrollment {
 	public void setOnlyUpdate(boolean onlyUpdate) {
 		this.onlyUpdate = onlyUpdate;
 	}
-	
-	
 
+	public Set<Lesson> getLessonsDone() {
+		return lessonsDone;
+	}
+	
 }
