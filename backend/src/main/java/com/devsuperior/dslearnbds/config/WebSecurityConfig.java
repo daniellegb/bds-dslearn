@@ -1,4 +1,3 @@
-
 package com.devsuperior.dslearnbds.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
-
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return super.userDetailsService();
-	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,10 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/actuator/**");
-		/*
-		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
-				"/swagger-ui.html", "/webjars/**");
-		*/
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import com.devsuperior.dslearnbds.components.JwtTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Value("${security.oauth2.client.client-id}")
 	private String clientId;

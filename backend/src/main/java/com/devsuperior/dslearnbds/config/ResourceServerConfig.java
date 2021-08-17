@@ -20,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
@@ -37,8 +37,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
-		//H2
+
+		// H2
 		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
@@ -46,31 +46,28 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
 		.anyRequest().authenticated();
-
+		
 		http.cors().configurationSource(corsConfigurationSource());
 	}
-
+	
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
-		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-		corsConfig.setAllowCredentials(true);
-		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);
-		return source;
-		
+	    CorsConfiguration corsConfig = new CorsConfiguration();
+	    corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+	    corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
+	    corsConfig.setAllowCredentials(true);
+	    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+	 
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", corsConfig);
+	    return source;
 	}
-
+	
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean 
-			= new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return bean;
-	}	
-	
-	
+	    FilterRegistrationBean<CorsFilter> bean
+	            = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+	    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+	    return bean;
+	}
 }
