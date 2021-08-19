@@ -50,6 +50,4 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 	
-	
-	
 }
